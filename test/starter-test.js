@@ -111,7 +111,7 @@ describe('Vaults', function () {
 
     //get artifacts
     Vault = await ethers.getContractFactory('ReaperVaultV2');
-    Strategy = await ethers.getContractFactory('ReaperStrategyScreamLeverage');
+    Strategy = await ethers.getContractFactory('ReaperStrategyTarot');
     Want = await ethers.getContractFactory('@openzeppelin/contracts/token/ERC20/ERC20.sol:ERC20');
 
     //deploy contracts
