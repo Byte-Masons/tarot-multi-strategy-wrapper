@@ -34,6 +34,8 @@ contract ReaperStrategyTarot is ReaperBaseStrategyv3 {
         address _tarotStrategy
     ) public initializer {
         want = _want;
+        tarotCrypt = IVaultv1_4(_tarotCrypt);
+        tarotStrategy = ILendingOptimizerStrategy(_tarotStrategy);
         __ReaperBaseStrategy_init(_vault, want, _feeRemitters, _strategists, _multisigRoles);
     }
 
@@ -87,6 +89,7 @@ contract ReaperStrategyTarot is ReaperBaseStrategyv3 {
      * The available {want} minus fees is returned to the vault.
      */
     function _withdraw(uint256 _withdrawAmount) internal {
+        tarotStrategy.updateExchangeRates();
         uint256 poolBalance = balanceOfPool();
         if (poolBalance < _withdrawAmount) {
             _withdrawAmount = poolBalance;
