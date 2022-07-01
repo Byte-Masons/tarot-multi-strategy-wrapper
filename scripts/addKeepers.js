@@ -1,10 +1,10 @@
 async function main() {
-  const strategyAddress = '0xd2e77d311dDca106d64c61E8CCb258d37636dd68';
+  const strategyAddress = '0xa641bB87c1ed73D7C2c1a9B5cBa409CBBF6bE3A3';
   const Strategy = await ethers.getContractFactory('ReaperStrategyTarot');
   const strategy = Strategy.attach(strategyAddress);
 
   const keeperAddress = [
-    '0x55a078AFC2e20C8c20d1aa4420710d827Ee494d4',
+    // '0x55a078AFC2e20C8c20d1aa4420710d827Ee494d4',
     // '0x5241F63D0C1f2970c45234a0F5b345036117E3C2',
     // '0xf58d534290Ce9fc4Ea639B8b9eE238Fe83d2efA6',
     // '0x5318250BD0b44D1740f47a5b6BE4F7fD5042682D',
@@ -19,16 +19,19 @@ async function main() {
     // '0x7B540a4D24C906E5fB3d3EcD0Bb7B1aEd3823897',
     // '0x8456a746e09A18F9187E5babEe6C60211CA728D1',
     // '0xd21E0fE4ba0379Ec8DF6263795c8120414Acd0A3',
+    // '0x3b410908e71ee04e7de2a87f8f9003afe6c1c7ce',
   ];
 
-  Promise.all(
-    keeperAddress.map(async (keeper) => {
-      console.log(`Granting keeper role to: ${keeper}`);
-      const keeperRole = '0x71a9859d7dd21b24504a6f306077ffc2d510b4d4b61128e931fe937441ad1836';
-      await strategy.grantRole(keeperRole, keeper);
-      console.log('Keeper role granted!');
-    }),
-  );
+  const keeperRole = '0x71a9859d7dd21b24504a6f306077ffc2d510b4d4b61128e931fe937441ad1836';
+
+  for (let i = 0; i < keeperAddress.length; i++) {
+    const keeper = keeperAddress[i];
+    console.log(`Granting keeper role to: ${keeper}`);
+    const tx = await strategy.grantRole(keeperRole, keeper);
+    await tx.wait();
+    console.log('Keeper role granted!');
+    await new Promise((r) => setTimeout(r, 2000));
+  }
 }
 
 main()

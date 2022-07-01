@@ -12,7 +12,9 @@ async function main() {
   const superAdmin = '0x04C710a1E8a738CDf7cAD3a52Ba77A784C35d8CE';
   const admin = '0x539eF36C804e4D735d8cAb69e8e441c12d4B88E0';
   const guardian = '0xf20E25f2AB644C8ecBFc992a6829478a85A98F2c';
-  const scWant = '0xb681F4928658a8d54bd4773F5B5DEAb35d63c3CF';
+  const want = '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83';
+  const tarotCrypt = '0xb4bb795B165FB0fBF11598a3c6E3D011EF5d9dF8';
+  const tarotStrategyAddress = '0x8858C3FEF08f66db12983893c326E3E46c94c539';
 
   const strategy = await hre.upgrades.deployProxy(
     Strategy,
@@ -21,7 +23,9 @@ async function main() {
       [treasuryAddress, paymentSplitterAddress],
       [strategist1, strategist2, strategist3],
       [superAdmin, admin, guardian],
-      scWant,
+      want,
+      tarotCrypt,
+      tarotStrategyAddress,
     ],
     {kind: 'uups', timeout: 0},
   );
