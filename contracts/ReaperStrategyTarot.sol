@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import "./abstract/ReaperBaseStrategyv4.sol";
+import "./abstract/ReaperBaseStrategyv3.sol";
 import "./interfaces/IUniswapV2Router02.sol";
 import "./interfaces/IVaultv1_4.sol";
 import "./interfaces/ILendingOptimizerStrategy.sol";
@@ -13,7 +13,7 @@ pragma solidity 0.8.11;
  * @dev This strategy will deposit in to the Tarot lending optimizer vault as a wrapper
  * to allow farming an existing vault+strategy from a new multi-strategy setup
  */
-contract ReaperStrategyTarot is ReaperBaseStrategyv4 {
+contract ReaperStrategyTarot is ReaperBaseStrategyv3 {
     using SafeERC20Upgradeable for IERC20Upgradeable;
 
     // 3rd-party contract addresses
