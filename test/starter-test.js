@@ -46,15 +46,14 @@ describe('Vaults', function () {
   const superAdminAddress = '0x04C710a1E8a738CDf7cAD3a52Ba77A784C35d8CE';
   const adminAddress = '0x539eF36C804e4D735d8cAb69e8e441c12d4B88E0';
   const guardianAddress = '0xf20E25f2AB644C8ecBFc992a6829478a85A98F2c';
-  const maintainerAddress = '0x81876677843D00a7D792E1617459aC2E93202576';
   const wftmAddress = '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83';
-  const wantAddress = wftmAddress;
+  const wantAddress = '0x74b23882a30290451A17c44f4F05243b6b58C76d';
 
-  const wantHolderAddr = '0x431e81e5dfb5a24541b5ff8762bdef3f32f96354';
+  const wantHolderAddr = '0x2400BB4D7221bA530Daee061D5Afe219E9223Eae';
   const strategistAddr = '0x1A20D7A31e5B3Bc5f02c8A146EF6f394502a10c4';
 
-  const tarotCrypt = '0xb4bb795B165FB0fBF11598a3c6E3D011EF5d9dF8';
-  const tarotStrategyAddress = '0x8858C3FEF08f66db12983893c326E3E46c94c539';
+  const tarotCrypt = '0x297c228B119f0d185a5D68a881D6E3637C008b5b';
+  const tarotStrategyAddress = '0x16c38c642f3126eC9E46148008E42dBF61cE730b';
 
   let owner;
   let wantHolder;
@@ -63,8 +62,6 @@ describe('Vaults', function () {
   let admin;
   let superAdmin;
   let unassignedRole;
-  let targetLTV;
-  let allowedLTVDrift;
 
   beforeEach(async function () {
     //reset network
@@ -74,7 +71,7 @@ describe('Vaults', function () {
         {
           forking: {
             jsonRpcUrl: 'https://rpcapi-tracing.fantom.network/',
-            blockNumber: 41685704,
+            blockNumber: 41916055,
           },
         },
       ],
@@ -355,7 +352,7 @@ describe('Vaults', function () {
       let totalAssets = await vault.totalAssets();
       console.log(`totalAssets: ${totalAssets}`);
       // Modify the price per share to not be 1 to 1
-      await want.connect(wantHolder).transfer(vault.address, toWantUnit('1337'));
+      await want.connect(wantHolder).transfer(vault.address, toWantUnit('337'));
       totalAssets = await vault.totalAssets();
       console.log(`totalAssets: ${totalAssets}`);
 
@@ -376,7 +373,7 @@ describe('Vaults', function () {
       expect(assets).to.equal(shareAmount);
       console.log(`assets: ${assets}`);
 
-      const depositAmount = toWantUnit('1337');
+      const depositAmount = toWantUnit('337');
       await vault.connect(wantHolder).deposit(depositAmount, wantHolderAddr);
 
       await want.connect(wantHolder).transfer(vault.address, depositAmount);
@@ -419,9 +416,9 @@ describe('Vaults', function () {
       let balanceIncrease = vaultBalanceAfter.sub(vaultBalance);
       expect(depositPreview).to.equal(balanceIncrease);
 
-      await want.connect(wantHolder).transfer(vault.address, toWantUnit('11346'));
+      await want.connect(wantHolder).transfer(vault.address, toWantUnit('346'));
 
-      depositAmount = toWantUnit('130');
+      depositAmount = toWantUnit('30');
       depositPreview = await vault.connect(wantHolder).previewDeposit(depositAmount);
       vaultBalance = await vault.balanceOf(wantHolderAddr);
       await vault.connect(wantHolder).deposit(depositAmount, wantHolderAddr);
@@ -445,7 +442,7 @@ describe('Vaults', function () {
       expect(maxMint).to.equal(tvlCap.sub(depositAmount));
 
       // Change the price per share
-      const transferAmount = toWantUnit('11346');
+      const transferAmount = toWantUnit('346');
       await want.connect(wantHolder).transfer(vault.address, transferAmount);
       depositAmount = toWantUnit('15');
       await vault.updateTvlCap(tvlCap.add(transferAmount).add(depositAmount));
@@ -466,7 +463,7 @@ describe('Vaults', function () {
       expect(userBalanceAfterMint).to.equal(userBalance.sub(mintPreview));
 
       // Change the price per share
-      const transferAmount = toWantUnit('11346');
+      const transferAmount = toWantUnit('346');
       await want.connect(wantHolder).transfer(vault.address, transferAmount);
 
       mintAmount = toWantUnit('13');
@@ -488,7 +485,7 @@ describe('Vaults', function () {
       expect(shareBalanceAfterMint).to.equal(mintAmount);
 
       // Change the price per share
-      const transferAmount = toWantUnit('11346');
+      const transferAmount = toWantUnit('346');
       await want.connect(wantHolder).transfer(vault.address, transferAmount);
 
       // Ensure it mints expected amount of shares with different price per share
@@ -524,7 +521,7 @@ describe('Vaults', function () {
       burnedSharesPreview = await vault.previewWithdraw(withdrawAmount);
       expect(burnedSharesPreview).to.equal(withdrawAmount);
       // // Change the price per share
-      const transferAmount = toWantUnit('35782');
+      const transferAmount = toWantUnit('82');
       await want.connect(wantHolder).transfer(vault.address, transferAmount);
       withdrawAmount = toWantUnit('33');
       burnedSharesPreview = await vault.previewWithdraw(withdrawAmount);
@@ -547,7 +544,7 @@ describe('Vaults', function () {
       redeemedAssetsPreview = await vault.previewRedeem(redeemAmount);
       expect(redeemedAssetsPreview).to.equal(redeemAmount);
       // // // Change the price per share
-      const transferAmount = toWantUnit('35782');
+      const transferAmount = toWantUnit('82');
       await want.connect(wantHolder).transfer(vault.address, transferAmount);
       redeemAmount = toWantUnit('33');
       redeemedAssetsPreview = await vault.previewRedeem(redeemAmount);
@@ -579,10 +576,10 @@ describe('Vaults', function () {
 
       await vault.connect(wantHolder).mint(mintAmount, wantHolderAddr);
       // Change the price per share
-      const transferAmount = toWantUnit('35782');
+      const transferAmount = toWantUnit('82');
       await want.connect(wantHolder).transfer(vault.address, transferAmount);
 
-      mintAmount = toWantUnit('625');
+      mintAmount = toWantUnit('25');
       mintAssetsPreview = await vault.previewMint(mintAmount);
       userBalance = await want.balanceOf(wantHolderAddr);
       await vault.connect(wantHolder).mint(mintAmount, wantHolderAddr);
@@ -660,7 +657,7 @@ describe('Vaults', function () {
       expect(mintedShares).to.equal(depositedShares);
 
       // Change the price per share
-      const transferAmount = toWantUnit('35782');
+      const transferAmount = toWantUnit('382');
       await want.connect(wantHolder).transfer(vault.address, transferAmount);
 
       mintBalanceBefore = await vault.balanceOf(wantHolderAddr);
@@ -751,9 +748,9 @@ describe('Vaults', function () {
     });
 
     it('should provide yield', async function () {
-      const timeToSkip = 3600;
+      const timeToSkip = 36000;
       const initialUserBalance = await want.balanceOf(wantHolderAddr);
-      const depositAmount = initialUserBalance.div(10);
+      const depositAmount = initialUserBalance.div(100);
 
       await vault.connect(wantHolder).deposit(depositAmount, wantHolderAddr);
       await strategy.harvest();
@@ -772,28 +769,28 @@ describe('Vaults', function () {
 
   describe('Vault<>Strat accounting', function () {
     it('Strat gets more money when it flows in', async function () {
-      await vault.connect(wantHolder).deposit(toWantUnit('500'), wantHolderAddr);
+      await vault.connect(wantHolder).deposit(toWantUnit('50'), wantHolderAddr);
       await strategy.harvest();
       await moveTimeForward(3600);
       await tarotStrategy.updateExchangeRates();
       let vaultBalance = await want.balanceOf(vault.address);
-      expect(vaultBalance).to.equal(ethers.utils.parseEther('50'));
+      expect(vaultBalance).to.equal(ethers.utils.parseEther('5'));
       let stratBalance = await strategy.balanceOf();
-      let expectedStrategyBalance = ethers.utils.parseEther('450');
+      let expectedStrategyBalance = ethers.utils.parseEther('45');
       let smallDifference = expectedStrategyBalance.div(1e12);
       console.log(`smallDifference ${smallDifference}`);
       let isSmallBalanceDifference = expectedStrategyBalance.sub(stratBalance).lt(smallDifference);
       expect(isSmallBalanceDifference).to.equal(true);
 
-      await vault.connect(wantHolder).deposit(toWantUnit('500'), wantHolderAddr);
+      await vault.connect(wantHolder).deposit(toWantUnit('50'), wantHolderAddr);
       await strategy.harvest();
       await moveTimeForward(3600);
       await tarotStrategy.updateExchangeRates();
       vaultBalance = await want.balanceOf(vault.address);
       console.log(`vaultBalance ${vaultBalance}`);
-      expect(vaultBalance).to.be.gte(ethers.utils.parseEther('100'));
+      expect(vaultBalance).to.be.gte(ethers.utils.parseEther('10'));
       stratBalance = await strategy.balanceOf();
-      expectedStrategyBalance = ethers.utils.parseEther('900');
+      expectedStrategyBalance = ethers.utils.parseEther('90');
       smallDifference = expectedStrategyBalance.div(1e12);
       console.log(`smallDifference ${smallDifference}`);
       console.log(`expectedStrategyBalance.sub(stratBalance): ${expectedStrategyBalance.sub(stratBalance)}`);
@@ -802,14 +799,14 @@ describe('Vaults', function () {
     });
 
     it('Vault pulls funds from strat as needed', async function () {
-      await vault.connect(wantHolder).deposit(toWantUnit('1000'), wantHolderAddr);
+      await vault.connect(wantHolder).deposit(toWantUnit('10'), wantHolderAddr);
       await strategy.harvest();
       await moveTimeForward(3600);
       await tarotStrategy.updateExchangeRates();
       let vaultBalance = await want.balanceOf(vault.address);
-      expect(vaultBalance).to.equal(ethers.utils.parseEther('100'));
+      expect(vaultBalance).to.equal(ethers.utils.parseEther('1'));
       let stratBalance = await strategy.balanceOf();
-      let expectedStrategyBalance = ethers.utils.parseEther('900');
+      let expectedStrategyBalance = ethers.utils.parseEther('9');
       let smallDifference = expectedStrategyBalance.div(1e12);
       let isSmallBalanceDifference = expectedStrategyBalance.sub(stratBalance).lt(smallDifference);
       expect(isSmallBalanceDifference).to.equal(true);
@@ -819,21 +816,21 @@ describe('Vaults', function () {
       await moveTimeForward(3600);
       await tarotStrategy.updateExchangeRates();
       vaultBalance = await want.balanceOf(vault.address);
-      expect(vaultBalance).to.be.gte(ethers.utils.parseEther('300'));
+      expect(vaultBalance).to.be.gte(ethers.utils.parseEther('3'));
       stratBalance = await strategy.balanceOf();
-      expectedStrategyBalance = ethers.utils.parseEther('700');
+      expectedStrategyBalance = ethers.utils.parseEther('7');
       smallDifference = expectedStrategyBalance.div(1e12);
       isSmallBalanceDifference = expectedStrategyBalance.sub(stratBalance).lt(smallDifference);
       expect(isSmallBalanceDifference).to.equal(true);
 
-      await vault.connect(wantHolder).deposit(toWantUnit('100'), wantHolderAddr);
+      await vault.connect(wantHolder).deposit(toWantUnit('1'), wantHolderAddr);
       await strategy.harvest();
       await moveTimeForward(3600);
       await tarotStrategy.updateExchangeRates();
       vaultBalance = await want.balanceOf(vault.address);
-      expect(vaultBalance).to.be.gte(ethers.utils.parseEther('330'));
+      expect(vaultBalance).to.be.gte(ethers.utils.parseEther('3.3'));
       stratBalance = await strategy.balanceOf();
-      expectedStrategyBalance = ethers.utils.parseEther('770');
+      expectedStrategyBalance = ethers.utils.parseEther('7.7');
       smallDifference = expectedStrategyBalance.div(1e12);
       isSmallBalanceDifference = expectedStrategyBalance.sub(stratBalance).lt(smallDifference);
       expect(isSmallBalanceDifference).to.equal(true);
@@ -842,14 +839,14 @@ describe('Vaults', function () {
 
   describe('Emergency scenarios', function () {
     it('Vault should handle emergency shutdown', async function () {
-      await vault.connect(wantHolder).deposit(toWantUnit('1000'), wantHolderAddr);
+      await vault.connect(wantHolder).deposit(toWantUnit('10'), wantHolderAddr);
       await strategy.harvest();
       await moveTimeForward(3600);
       await tarotStrategy.updateExchangeRates();
       let vaultBalance = await want.balanceOf(vault.address);
-      expect(vaultBalance).to.equal(ethers.utils.parseEther('100'));
+      expect(vaultBalance).to.equal(ethers.utils.parseEther('1'));
       let stratBalance = await strategy.balanceOf();
-      expectedStrategyBalance = ethers.utils.parseEther('900');
+      expectedStrategyBalance = ethers.utils.parseEther('9');
       smallDifference = expectedStrategyBalance.div(1e12);
       isSmallBalanceDifference = expectedStrategyBalance.sub(stratBalance).lt(smallDifference);
       expect(isSmallBalanceDifference).to.equal(true);
@@ -857,7 +854,7 @@ describe('Vaults', function () {
       await vault.setEmergencyShutdown(true);
       await strategy.harvest();
       vaultBalance = await want.balanceOf(vault.address);
-      expect(vaultBalance).to.be.gte(ethers.utils.parseEther('1000'));
+      expect(vaultBalance).to.be.gte(ethers.utils.parseEther('10'));
       stratBalance = await strategy.balanceOf();
       smallDifference = vaultBalance.div(1e12);
       isSmallBalanceDifference = stratBalance.lt(smallDifference);
@@ -865,14 +862,14 @@ describe('Vaults', function () {
     });
 
     it('Strategy should handle emergency exit', async function () {
-      await vault.connect(wantHolder).deposit(toWantUnit('1000'), wantHolderAddr);
+      await vault.connect(wantHolder).deposit(toWantUnit('10'), wantHolderAddr);
       await strategy.harvest();
       await moveTimeForward(3600);
       await tarotStrategy.updateExchangeRates();
       let vaultBalance = await want.balanceOf(vault.address);
-      expect(vaultBalance).to.equal(ethers.utils.parseEther('100'));
+      expect(vaultBalance).to.equal(ethers.utils.parseEther('1'));
       let stratBalance = await strategy.balanceOf();
-      let expectedStrategyBalance = ethers.utils.parseEther('900');
+      let expectedStrategyBalance = ethers.utils.parseEther('9');
       let smallDifference = expectedStrategyBalance.div(1e12);
       let isSmallBalanceDifference = expectedStrategyBalance.sub(stratBalance).lt(smallDifference);
       expect(isSmallBalanceDifference).to.equal(true);
@@ -880,7 +877,7 @@ describe('Vaults', function () {
       await vault.setEmergencyShutdown(true);
       await strategy.harvest();
       vaultBalance = await want.balanceOf(vault.address);
-      expect(vaultBalance).to.be.gte(ethers.utils.parseEther('1000'));
+      expect(vaultBalance).to.be.gte(ethers.utils.parseEther('10'));
       stratBalance = await strategy.balanceOf();
       smallDifference = vaultBalance.div(1e12);
       isSmallBalanceDifference = stratBalance.lt(smallDifference);
