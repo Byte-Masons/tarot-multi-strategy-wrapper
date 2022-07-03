@@ -1,7 +1,7 @@
 const hre = require('hardhat');
 
 async function main() {
-  const vaultAddress = '0xa6313302B3CeFF2727f19AAA30d7240d5B3CD9CD';
+  const vaultAddress = '0xcdA5deA176F2dF95082f4daDb96255Bdb2bc7C7D';
 
   const Strategy = await ethers.getContractFactory('ReaperStrategyTarot');
   const treasuryAddress = '0x0e7c5313E9BB80b654734d9b7aB1FB01468deE3b';
@@ -12,9 +12,9 @@ async function main() {
   const superAdmin = '0x04C710a1E8a738CDf7cAD3a52Ba77A784C35d8CE';
   const admin = '0x539eF36C804e4D735d8cAb69e8e441c12d4B88E0';
   const guardian = '0xf20E25f2AB644C8ecBFc992a6829478a85A98F2c';
-  const want = '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83';
-  const tarotCrypt = '0xb4bb795B165FB0fBF11598a3c6E3D011EF5d9dF8';
-  const tarotStrategyAddress = '0x8858C3FEF08f66db12983893c326E3E46c94c539';
+  const want = '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75';
+  const tarotCrypt = '0x7A688CFc89BAFA29f5027EE457454bec919cAEf2';
+  const tarotStrategyAddress = '0x34E4A4670E26A9BB3DD0Ec0909914C8d95B5B0B1';
 
   const strategy = await hre.upgrades.deployProxy(
     Strategy,
