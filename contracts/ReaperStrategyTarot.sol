@@ -101,7 +101,9 @@ contract ReaperStrategyTarot is ReaperBaseStrategyv4 {
             sharesToWithdraw = shareBalance;
         }
 
-        tarotCrypt.withdraw(sharesToWithdraw);
+        if (sharesToWithdraw != 0) {
+            tarotCrypt.withdraw(sharesToWithdraw);
+        }
     }
 
     /**
