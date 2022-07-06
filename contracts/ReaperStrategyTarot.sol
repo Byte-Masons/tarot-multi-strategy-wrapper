@@ -6,6 +6,7 @@ import "./interfaces/IVaultv1_4.sol";
 import "./interfaces/ILendingOptimizerStrategy.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/math/MathUpgradeable.sol";
+import {FixedPointMathLib} from "./library/FixedPointMathLib.sol";
 
 pragma solidity 0.8.11;
 
@@ -15,6 +16,7 @@ pragma solidity 0.8.11;
  */
 contract ReaperStrategyTarot is ReaperBaseStrategyv4 {
     using SafeERC20Upgradeable for IERC20Upgradeable;
+    using FixedPointMathLib for uint256;
 
     // 3rd-party contract addresses
     IVaultv1_4 public tarotCrypt;
@@ -99,6 +101,11 @@ contract ReaperStrategyTarot is ReaperBaseStrategyv4 {
 
         if (shareBalance < sharesToWithdraw) {
             sharesToWithdraw = shareBalance;
+        }
+
+        if (sharesToWithdraw == 0) {
+            uint256 sharesToWithdrawCeil = _withdrawAmount.mulDivUp(1e18, tarotCrypt.getPricePerFullShare());
+            sharesToWithdraw = MathUpgradeable.min(shareBalance, sharesToWithdrawCeil);
         }
 
         if (sharesToWithdraw != 0) {
