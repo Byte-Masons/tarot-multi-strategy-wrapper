@@ -3,14 +3,14 @@
   "proxies": [
     {
       "address": "0x8198f5d8F8CfFE8f9C413d98a0A55aEB8ab9FbB7",
-      "txHash": "0xc21ed45fa28cbc2766aa91b9c077b8de704afec48c621bcd8b0ac19518355e38",
+      "txHash": "0x66499a9c08cf6c134bb9127c49aa41ad17c748bef81d44a226ce6c2d53f1df6a",
       "kind": "uups"
     }
   ],
   "impls": {
-    "16651afdfefe683ac97c9cd9cf9219b2d225728ff8fe1da0a927caa86652fed1": {
+    "8654f00192438ef0bdf399a4f13dacd4f40c1a55e47b11fb3a7bb29ef874026d": {
       "address": "0x36b58F5C1969B7b6591D752ea6F5486D069010AB",
-      "txHash": "0xb9bf1956e8382540a8cdc2b407eef7bed471abf864dbb48559ccabb6f8e7d5a0",
+      "txHash": "0x108f7a1470351583b45dbdd36c7d35b5ccf84ea49f2ad3af8ff99094230aece0",
       "layout": {
         "storage": [
           {
@@ -194,7 +194,7 @@
             "label": "tarotCrypt",
             "offset": 0,
             "slot": "312",
-            "type": "t_contract(IVaultv1_4)10663",
+            "type": "t_contract(IVaultv1_4)9937",
             "contract": "ReaperStrategyTarot",
             "src": "contracts\\ReaperStrategyTarot.sol:22"
           },
@@ -202,7 +202,7 @@
             "label": "tarotStrategy",
             "offset": 0,
             "slot": "313",
-            "type": "t_contract(ILendingOptimizerStrategy)10158",
+            "type": "t_contract(ILendingOptimizerStrategy)9432",
             "contract": "ReaperStrategyTarot",
             "src": "contracts\\ReaperStrategyTarot.sol:23"
           }
@@ -232,11 +232,11 @@
             "label": "bytes32",
             "numberOfBytes": "32"
           },
-          "t_contract(ILendingOptimizerStrategy)10158": {
+          "t_contract(ILendingOptimizerStrategy)9432": {
             "label": "contract ILendingOptimizerStrategy",
             "numberOfBytes": "20"
           },
-          "t_contract(IVaultv1_4)10663": {
+          "t_contract(IVaultv1_4)9937": {
             "label": "contract IVaultv1_4",
             "numberOfBytes": "20"
           },
