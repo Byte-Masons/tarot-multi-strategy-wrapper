@@ -3,14 +3,24 @@
   "proxies": [
     {
       "address": "0x8198f5d8F8CfFE8f9C413d98a0A55aEB8ab9FbB7",
+<<<<<<< HEAD
       "txHash": "0xe8e3eda8fe9d1ab4bc9e142148cf8375c6c74a4c0740450ef6b51b39cba99313",
+=======
+      "txHash": "0x7e64a4b269ac41bf1404f0d365ef97ffc380dd458fdfd6b4597217b1442d3f5f",
+>>>>>>> master
       "kind": "uups"
     }
   ],
   "impls": {
+<<<<<<< HEAD
     "16651afdfefe683ac97c9cd9cf9219b2d225728ff8fe1da0a927caa86652fed1": {
       "address": "0x36b58F5C1969B7b6591D752ea6F5486D069010AB",
       "txHash": "0x276b174bef35370a292df6f400f11a70144c640c85b32f9fa6459c3b9913756f",
+=======
+    "8654f00192438ef0bdf399a4f13dacd4f40c1a55e47b11fb3a7bb29ef874026d": {
+      "address": "0x36b58F5C1969B7b6591D752ea6F5486D069010AB",
+      "txHash": "0x522c7be1af05bfb29e1d10ebf022ec27b13f4766f4cb3d24209470917987518e",
+>>>>>>> master
       "layout": {
         "storage": [
           {
@@ -194,17 +204,25 @@
             "label": "tarotCrypt",
             "offset": 0,
             "slot": "312",
+<<<<<<< HEAD
             "type": "t_contract(IVaultv1_4)10663",
+=======
+            "type": "t_contract(IVaultv1_4)9937",
+>>>>>>> master
             "contract": "ReaperStrategyTarot",
-            "src": "contracts\\ReaperStrategyTarot.sol:24"
+            "src": "contracts\\ReaperStrategyTarot.sol:22"
           },
           {
             "label": "tarotStrategy",
             "offset": 0,
             "slot": "313",
+<<<<<<< HEAD
             "type": "t_contract(ILendingOptimizerStrategy)10158",
+=======
+            "type": "t_contract(ILendingOptimizerStrategy)9432",
+>>>>>>> master
             "contract": "ReaperStrategyTarot",
-            "src": "contracts\\ReaperStrategyTarot.sol:25"
+            "src": "contracts\\ReaperStrategyTarot.sol:23"
           }
         ],
         "types": {
@@ -232,11 +250,19 @@
             "label": "bytes32",
             "numberOfBytes": "32"
           },
+<<<<<<< HEAD
           "t_contract(ILendingOptimizerStrategy)10158": {
             "label": "contract ILendingOptimizerStrategy",
             "numberOfBytes": "20"
           },
           "t_contract(IVaultv1_4)10663": {
+=======
+          "t_contract(ILendingOptimizerStrategy)9432": {
+            "label": "contract ILendingOptimizerStrategy",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IVaultv1_4)9937": {
+>>>>>>> master
             "label": "contract IVaultv1_4",
             "numberOfBytes": "20"
           },
