@@ -196,7 +196,7 @@
             "slot": "312",
             "type": "t_contract(IVaultv1_4)10663",
             "contract": "ReaperStrategyTarot",
-            "src": "contracts\\ReaperStrategyTarot.sol:20"
+            "src": "contracts\\ReaperStrategyTarot.sol:22"
           },
           {
             "label": "tarotStrategy",
@@ -204,7 +204,7 @@
             "slot": "313",
             "type": "t_contract(ILendingOptimizerStrategy)10158",
             "contract": "ReaperStrategyTarot",
-            "src": "contracts\\ReaperStrategyTarot.sol:21"
+            "src": "contracts\\ReaperStrategyTarot.sol:23"
           }
         ],
         "types": {
