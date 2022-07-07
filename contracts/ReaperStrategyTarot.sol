@@ -6,6 +6,7 @@ import "./interfaces/IVaultv1_4.sol";
 import "./interfaces/ILendingOptimizerStrategy.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/math/MathUpgradeable.sol";
+import {FixedPointMathLib} from "./library/FixedPointMathLib.sol";
 
 pragma solidity 0.8.11;
 
@@ -15,6 +16,7 @@ pragma solidity 0.8.11;
  */
 contract ReaperStrategyTarot is ReaperBaseStrategyv3 {
     using SafeERC20Upgradeable for IERC20Upgradeable;
+    using FixedPointMathLib for uint256;
 
     // 3rd-party contract addresses
     IVaultv1_4 public tarotCrypt;
@@ -75,7 +77,10 @@ contract ReaperStrategyTarot is ReaperBaseStrategyv3 {
         } else {
             liquidatedAmount = _amountNeeded;
         }
-        loss = _amountNeeded - liquidatedAmount;
+
+        if (_amountNeeded > liquidatedAmount) {
+            loss = _amountNeeded - liquidatedAmount;
+        }
     }
 
     function _liquidateAllPositions() internal override returns (uint256 amountFreed) {
@@ -101,7 +106,14 @@ contract ReaperStrategyTarot is ReaperBaseStrategyv3 {
             sharesToWithdraw = shareBalance;
         }
 
-        tarotCrypt.withdraw(sharesToWithdraw);
+        if (sharesToWithdraw == 0) {
+            uint256 sharesToWithdrawCeil = _withdrawAmount.mulDivUp(1e18, tarotCrypt.getPricePerFullShare());
+            sharesToWithdraw = MathUpgradeable.min(shareBalance, sharesToWithdrawCeil);
+        }
+
+        if (sharesToWithdraw != 0) {
+            tarotCrypt.withdraw(sharesToWithdraw);
+        }
     }
 
     /**
