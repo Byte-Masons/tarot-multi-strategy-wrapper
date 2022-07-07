@@ -3,14 +3,14 @@
   "proxies": [
     {
       "address": "0x8198f5d8F8CfFE8f9C413d98a0A55aEB8ab9FbB7",
-      "txHash": "0x90326aad97c7b2477871899cb1d0c6fd254688acbed6ca49ee8c6525c421b25c",
+      "txHash": "0x7e64a4b269ac41bf1404f0d365ef97ffc380dd458fdfd6b4597217b1442d3f5f",
       "kind": "uups"
     }
   ],
   "impls": {
-    "43d17980eae8ebf6ef469d7b72d340d0f74379a09a15f9ce22670417b0a66ef2": {
+    "8654f00192438ef0bdf399a4f13dacd4f40c1a55e47b11fb3a7bb29ef874026d": {
       "address": "0x36b58F5C1969B7b6591D752ea6F5486D069010AB",
-      "txHash": "0x73bfa871316951999fe485a927efcf8cc453b950e57e7a291aeb474542245e9c",
+      "txHash": "0x522c7be1af05bfb29e1d10ebf022ec27b13f4766f4cb3d24209470917987518e",
       "layout": {
         "storage": [
           {
@@ -194,17 +194,17 @@
             "label": "tarotCrypt",
             "offset": 0,
             "slot": "312",
-            "type": "t_contract(IVaultv1_4)9933",
+            "type": "t_contract(IVaultv1_4)9937",
             "contract": "ReaperStrategyTarot",
-            "src": "contracts\\ReaperStrategyTarot.sol:24"
+            "src": "contracts\\ReaperStrategyTarot.sol:22"
           },
           {
             "label": "tarotStrategy",
             "offset": 0,
             "slot": "313",
-            "type": "t_contract(ILendingOptimizerStrategy)9428",
+            "type": "t_contract(ILendingOptimizerStrategy)9432",
             "contract": "ReaperStrategyTarot",
-            "src": "contracts\\ReaperStrategyTarot.sol:25"
+            "src": "contracts\\ReaperStrategyTarot.sol:23"
           }
         ],
         "types": {
@@ -232,11 +232,11 @@
             "label": "bytes32",
             "numberOfBytes": "32"
           },
-          "t_contract(ILendingOptimizerStrategy)9428": {
+          "t_contract(ILendingOptimizerStrategy)9432": {
             "label": "contract ILendingOptimizerStrategy",
             "numberOfBytes": "20"
           },
-          "t_contract(IVaultv1_4)9933": {
+          "t_contract(IVaultv1_4)9937": {
             "label": "contract IVaultv1_4",
             "numberOfBytes": "20"
           },
