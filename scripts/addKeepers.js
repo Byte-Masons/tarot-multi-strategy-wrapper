@@ -30,7 +30,7 @@ async function main() {
     const tx = await strategy.grantRole(keeperRole, keeper);
     await tx.wait();
     console.log('Keeper role granted!');
-    await new Promise((r) => setTimeout(r, 2000));
+    await new Promise((r) => setTimeout(r, 4000));
   }
 }
 
